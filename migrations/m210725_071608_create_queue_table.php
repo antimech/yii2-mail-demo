@@ -15,7 +15,6 @@ class m210725_071608_create_queue_table extends Migration
         $this->createTable('{{%queue}}', [
             'id' => $this->bigPrimaryKey(),
             'template_id' => $this->bigInteger()->notNull(),
-            'FOREIGN KEY(template_id) REFERENCES templates(id)',
             'text' => $this->text()->notNull(),
             'email' => $this->string()->notNull(),
             'send_at' => $this->timestamp(),

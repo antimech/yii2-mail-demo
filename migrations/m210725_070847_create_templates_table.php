@@ -15,7 +15,6 @@ class m210725_070847_create_templates_table extends Migration
         $this->createTable('{{%templates}}', [
             'id' => $this->bigPrimaryKey(),
             'user_id' => $this->bigInteger()->notNull(),
-            'FOREIGN KEY(user_id) REFERENCES users(id)',
             'text' => $this->text(),
             'created_at' => $this->timestamp(),
             'updated_at' => $this->timestamp(),
