@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "templates".
@@ -14,7 +16,7 @@ use Yii;
  *
  * @property Queue[] $queues
  */
-class Template extends \yii\db\ActiveRecord
+class Template extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -57,5 +59,21 @@ class Template extends \yii\db\ActiveRecord
     public function getQueues()
     {
         return $this->hasMany(Queue::className(), ['template_id' => 'id']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+            ],
+        ];
     }
 }
