@@ -23,6 +23,13 @@ class m210725_071608_create_queue_table extends Migration
             'created_at' => $this->timestamp(),
             'updated_at' => $this->timestamp(),
         ]);
+
+        // creates index for column `template_id`
+        $this->createIndex(
+            'idx-queue-template_id',
+            'queue',
+            'template_id'
+        );
     }
 
     /**
@@ -30,6 +37,12 @@ class m210725_071608_create_queue_table extends Migration
      */
     public function safeDown()
     {
+        // drops index for column `template_id`
+        $this->dropIndex(
+            'idx-templates-template_id',
+            'queue'
+        );
+
         $this->dropTable('{{%queue}}');
     }
 }
