@@ -30,8 +30,8 @@ class Template extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['text'], 'required'],
             [['text'], 'string'],
-            [['created_at'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
         ];
     }
