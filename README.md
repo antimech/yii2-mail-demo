@@ -1,7 +1,8 @@
 # Installation
 ```Shell
+$ composer install
 $ touch db/database.db
-$ php yii migrate
+$ php yii migrate/fresh
 $ php yii serve
 ```
 
