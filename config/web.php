@@ -53,6 +53,11 @@ $config = [
         */
     ],
     'params' => $params,
+    'modules' => [
+        'mail' => [
+            'class' => 'app\modules\mail\Module',
+        ],
+    ],
 ];
 
 if (YII_ENV_DEV) {
