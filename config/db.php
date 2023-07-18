@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'sqlite:@app/db/database.db',
+    'dsn' => 'sqlite:@app/db/database.sqlite',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

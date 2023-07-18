@@ -36,4 +36,4 @@ tests/_support/_generated
 /.vagrant
 
 #sqlite database
-db/database.db
+db/database.sqlite
