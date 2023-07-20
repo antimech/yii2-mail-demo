@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Template */
+/* @var yii\web\View $this */
+/* @var app\models\Template $model */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Templates', 'url' => ['index']];

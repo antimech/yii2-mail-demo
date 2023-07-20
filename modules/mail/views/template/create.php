@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Template */
+/* @var yii\web\View $this */
+/* @var app\models\Template $model */
 
 $this->title = 'Create Template';
 $this->params['breadcrumbs'][] = ['label' => 'Templates', 'url' => ['index']];

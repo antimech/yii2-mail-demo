@@ -23,7 +23,7 @@ class TemplateController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -34,6 +34,7 @@ class TemplateController extends Controller
 
     /**
      * Lists all Template models.
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -59,6 +60,7 @@ class TemplateController extends Controller
 
     /**
      * Displays a single Template model.
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -73,6 +75,7 @@ class TemplateController extends Controller
     /**
      * Creates a new Template model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -97,6 +100,7 @@ class TemplateController extends Controller
     /**
      * Updates an existing Template model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -117,6 +121,7 @@ class TemplateController extends Controller
     /**
      * Deletes an existing Template model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -131,6 +136,7 @@ class TemplateController extends Controller
     /**
      * Finds the Template model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
      * @return Template the loaded model
      * @throws NotFoundHttpException if the model cannot be found
