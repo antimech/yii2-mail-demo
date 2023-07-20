@@ -1,6 +1,7 @@
 # Installation
 ```Shell
 $ composer install
+$ mkdir db
 $ touch db/database.sqlite
 $ php yii migrate/fresh
 $ php yii serve
