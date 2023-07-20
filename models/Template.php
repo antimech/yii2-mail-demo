@@ -58,7 +58,7 @@ class Template extends ActiveRecord
      */
     public function getQueues()
     {
-        return $this->hasMany(Queue::className(), ['template_id' => 'id']);
+        return $this->hasMany(Queue::class, ['template_id' => 'id']);
     }
 
     /**

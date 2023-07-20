@@ -40,7 +40,7 @@ class Queue extends \yii\db\ActiveRecord
             [['template_id', 'status'], 'integer'],
             [['send_at', 'sent_at', 'created_at', 'updated_at'], 'safe'],
             [['email'], 'string', 'max' => 255],
-            [['template_id'], 'exist', 'skipOnError' => true, 'targetClass' => Template::className(), 'targetAttribute' => ['template_id' => 'id']],
+            [['template_id'], 'exist', 'skipOnError' => true, 'targetClass' => Template::class, 'targetAttribute' => ['template_id' => 'id']],
         ];
     }
 
@@ -69,6 +69,6 @@ class Queue extends \yii\db\ActiveRecord
      */
     public function getTemplate()
     {
-        return $this->hasOne(Template::className(), ['id' => 'template_id']);
+        return $this->hasOne(Template::class, ['id' => 'template_id']);
     }
 }
