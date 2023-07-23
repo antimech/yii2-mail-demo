@@ -13,8 +13,8 @@ class m210725_071608_create_queue_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%queue}}', [
-            'id' => $this->bigPrimaryKey(),
-            'template_id' => $this->bigInteger()->notNull(),
+            'id' => $this->bigPrimaryKey()->unsigned(),
+            'template_id' => $this->bigInteger()->unsigned()->notNull(),
             'text' => $this->text()->notNull(),
             'email' => $this->string()->notNull(),
             'send_at' => $this->timestamp(),

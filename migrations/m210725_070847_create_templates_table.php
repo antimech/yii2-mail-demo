@@ -13,8 +13,8 @@ class m210725_070847_create_templates_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%templates}}', [
-            'id' => $this->bigPrimaryKey(),
-            'user_id' => $this->bigInteger()->notNull(),
+            'id' => $this->bigPrimaryKey()->unsigned(),
+            'user_id' => $this->bigInteger()->unsigned()->notNull(),
             'text' => $this->text(),
             'created_at' => $this->timestamp(),
             'updated_at' => $this->timestamp(),
