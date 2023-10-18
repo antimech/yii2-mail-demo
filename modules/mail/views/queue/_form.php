@@ -31,3 +31,12 @@ $templates = ArrayHelper::map(Template::find()->all(), 'id', 'text');
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<script>
+    const templateId = document.getElementById('queue-template_id');
+    const queueText = document.getElementById('queue-text');
+
+    templateId.onchange = () => {
+        queueText.value = templateId.options[templateId.selectedIndex].text;
+    };
+</script>
