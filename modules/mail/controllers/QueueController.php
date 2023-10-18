@@ -1,0 +1,187 @@
+<?php
+
+namespace app\modules\mail\controllers;
+
+use app\models\Queue;
+use Yii;
+use yii\data\ActiveDataProvider;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+
+/**
+ * QueueController implements the CRUD actions for Queue model.
+ */
+class QueueController extends Controller
+{
+    /**
+     * @inheritDoc
+     */
+    public function behaviors()
+    {
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::class,
+                    'actions' => [
+                        'delete' => ['POST'],
+                    ],
+                ],
+            ]
+        );
+    }
+
+    /**
+     * Lists all Queue models.
+     *
+     * @return string
+     */
+    public function actionIndex()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Queue::find(),
+            /*
+            'pagination' => [
+                'pageSize' => 50
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+            */
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Displays a single Queue model.
+     *
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Creates a new Queue model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     *
+     * @return string|\yii\web\Response
+     */
+    public function actionCreate()
+    {
+        $model = new Queue();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing Queue model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     *
+     * @param int $id ID
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Send a mail.
+     * If send is successful, the browser will be redirected to the 'view' page.
+     *
+     * @param int $id ID
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException if the model cannot be found or this is not a POST request
+     */
+    public function actionSend($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($this->request->isPost) {
+            Yii::$app->mailer->compose()
+                ->setFrom(Yii::$app->params['senderEmail'])
+                ->setTo($model->email)
+                ->setTextBody($model->text)
+                ->send();
+
+            $model->load([
+                'Queue' => [
+                    'sent_at' => time(),
+                    'status' => Queue::STATUS_SENT
+                ]
+            ]);
+            $model->save();
+
+
+            $session = Yii::$app->session;
+            $session->setFlash('success', 'You have successfully sent the queue.');
+
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Deletes an existing Queue model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
+     * @param int $id ID
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the Queue model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     *
+     * @param int $id ID
+     * @return Queue the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Queue::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+}

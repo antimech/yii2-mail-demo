@@ -27,10 +27,9 @@ $config = [
             'errorAction' => 'site/error',
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
+            'class' => \yii\symfonymailer\Mailer::class,
+            'viewPath' => '@app/mail',
+            // send all mails to a file by default.
             'useFileTransport' => true,
         ],
         'log' => [
@@ -53,6 +52,11 @@ $config = [
         */
     ],
     'params' => $params,
+    'modules' => [
+        'mail' => [
+            'class' => 'app\modules\mail\Module',
+        ],
+    ],
 ];
 
 if (YII_ENV_DEV) {
