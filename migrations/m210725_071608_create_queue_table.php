@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Queue;
 use yii\db\Migration;
 
 /**
@@ -19,7 +20,7 @@ class m210725_071608_create_queue_table extends Migration
             'email' => $this->string()->notNull(),
             'send_at' => $this->timestamp(),
             'sent_at' => $this->timestamp(),
-            'status' => $this->integer()->notNull(),
+            'status' => $this->integer()->notNull()->defaultValue(Queue::STATUS_CREATED),
             'created_at' => $this->timestamp(),
             'updated_at' => $this->timestamp(),
         ]);

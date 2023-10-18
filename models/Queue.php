@@ -22,6 +22,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class Queue extends \yii\db\ActiveRecord
 {
+    const STATUS_CREATED = 0;
+    const STATUS_SENT = 1;
+
     /**
      * {@inheritdoc}
      */
@@ -36,7 +39,7 @@ class Queue extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['text', 'email', 'template_id', 'status'], 'required'],
+            [['text', 'email', 'template_id'], 'required'],
             [['text'], 'string'],
             [['template_id', 'status'], 'integer'],
             [['send_at', 'sent_at', 'created_at', 'updated_at'], 'safe'],
