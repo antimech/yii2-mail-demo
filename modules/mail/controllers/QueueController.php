@@ -3,6 +3,7 @@
 namespace app\modules\mail\controllers;
 
 use app\models\Queue;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -113,6 +114,43 @@ class QueueController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Send a mail.
+     * If send is successful, the browser will be redirected to the 'view' page.
+     *
+     * @param int $id ID
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException if the model cannot be found or this is not a POST request
+     */
+    public function actionSend($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($this->request->isPost) {
+            Yii::$app->mailer->compose()
+                ->setFrom(Yii::$app->params['senderEmail'])
+                ->setTo($model->email)
+                ->setTextBody($model->text)
+                ->send();
+
+            $model->load([
+                'Queue' => [
+                    'sent_at' => time(),
+                    'status' => Queue::STATUS_SENT
+                ]
+            ]);
+            $model->save();
+
+
+            $session = Yii::$app->session;
+            $session->setFlash('success', 'You have successfully sent the queue.');
+
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     /**
