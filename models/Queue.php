@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "queue".
@@ -35,7 +36,7 @@ class Queue extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['text', 'email', 'template_id', 'status', 'created_at'], 'required'],
+            [['text', 'email', 'template_id', 'status'], 'required'],
             [['text'], 'string'],
             [['template_id', 'status'], 'integer'],
             [['send_at', 'sent_at', 'created_at', 'updated_at'], 'safe'],
@@ -59,6 +60,13 @@ class Queue extends \yii\db\ActiveRecord
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
         ];
     }
 
