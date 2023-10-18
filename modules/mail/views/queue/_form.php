@@ -1,18 +1,22 @@
 <?php
 
+use app\models\Template;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var app\models\Queue $model */
 /** @var yii\widgets\ActiveForm $form */
+
+$templates = ArrayHelper::map(Template::find()->all(), 'id', 'text');
 ?>
 
 <div class="queue-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'template_id')->textInput() ?>
+    <?= $form->field($model, 'template_id')->dropDownList($templates, ['prompt' => '']) ?>
 
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
 
