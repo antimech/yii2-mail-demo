@@ -67,13 +67,7 @@ class Template extends ActiveRecord
     public function behaviors()
     {
         return [
-            [
-                'class' => TimestampBehavior::class,
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
-                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
-                ],
-            ],
+            TimestampBehavior::class,
         ];
     }
 }
