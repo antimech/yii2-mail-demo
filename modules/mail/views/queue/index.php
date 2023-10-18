@@ -37,6 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
             [
                 'class' => ActionColumn::class,
+                'visibleButtons' => [
+                    'update' => function ($model, $key, $index) {
+                        return $model->sent_at === null;
+                    }
+                ],
                 'urlCreator' => function ($action, Queue $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
