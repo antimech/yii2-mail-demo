@@ -40,6 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'visibleButtons' => [
                     'update' => function ($model, $key, $index) {
                         return $model->sent_at === null;
+                    },
+                    'delete' => function ($model, $key, $index) {
+                        return $model->sent_at === null;
                     }
                 ],
                 'urlCreator' => function ($action, Queue $model, $key, $index, $column) {
