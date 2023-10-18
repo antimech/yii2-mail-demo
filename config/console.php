@@ -39,13 +39,22 @@ $config = [
             'class' => 'app\modules\mail\Module',
         ],
     ],
-    /*
     'controllerMap' => [
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => null, // disable non-namespaced migrations if app\migrations is listed below
+            'migrationNamespaces' => [
+                'app\migrations', // Common migrations for the whole application
+                'app\modules\mail\migrations', // Migrations for the specific project's module
+                // 'some\extension\migrations', // Migrations for the specific extension
+            ],
+        ],
+        /*
         'fixture' => [ // Fixture generation command line.
             'class' => 'yii\faker\FixtureController',
         ],
+        */
     ],
-    */
 ];
 
 if (YII_ENV_DEV) {

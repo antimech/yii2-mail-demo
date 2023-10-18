@@ -1,5 +1,7 @@
 <?php
 
+namespace app\modules\mail\migrations;
+
 use app\models\Queue;
 use yii\db\Migration;
 
