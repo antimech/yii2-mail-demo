@@ -20,8 +20,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'send_at')->textInput() ?>
 
-    <?= $form->field($model, 'sent_at')->textInput() ?>
-
     <?= $form->field($model, 'status')->textInput() ?>
 
     <div class="form-group">
