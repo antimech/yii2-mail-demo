@@ -41,6 +41,7 @@ class Queue extends \yii\db\ActiveRecord
             [['template_id', 'status'], 'integer'],
             [['send_at', 'sent_at', 'created_at', 'updated_at'], 'safe'],
             [['email'], 'string', 'max' => 255],
+            [['email'], 'email'],
             [['template_id'], 'exist', 'skipOnError' => true, 'targetClass' => Template::class, 'targetAttribute' => ['template_id' => 'id']],
         ];
     }
