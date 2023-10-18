@@ -40,7 +40,7 @@ class m210725_071608_create_queue_table extends Migration
     {
         // drops index for column `template_id`
         $this->dropIndex(
-            'idx-templates-template_id',
+            'idx-queue-template_id',
             'queue'
         );
 
