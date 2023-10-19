@@ -3,6 +3,7 @@
 namespace app\modules\mail\commands;
 
 use app\modules\mail\models\Queue;
+use app\modules\mail\services\QueueService;
 use Yii;
 use yii\console\Controller;
 use yii\console\ExitCode;
@@ -10,6 +11,14 @@ use yii\helpers\Console;
 
 class ProcessScheduledQueueController extends Controller
 {
+    public QueueService $queueService;
+
+    public function __construct($id, $module, $config = [], QueueService $queueService)
+    {
+        parent::__construct($id, $module, $config);
+        $this->queueService = $queueService;
+    }
+
     public function actionIndex()
     {
         $queues = Queue::find()
@@ -19,19 +28,7 @@ class ProcessScheduledQueueController extends Controller
 
         /** @var Queue $queue */
         foreach ($queues as $queue) {
-            Yii::$app->mailer->compose()
-                ->setFrom(Yii::$app->params['senderEmail'])
-                ->setTo($queue->email)
-                ->setTextBody($queue->text)
-                ->send();
-
-            $queue->load([
-                'Queue' => [
-                    'sent_at' => time(),
-                    'status' => Queue::STATUS_SENT
-                ]
-            ]);
-            $queue->save();
+            $this->queueService->send($queue);
 
             echo 'Queue ' . $queue->id . ' is sent!' . PHP_EOL;
         }

@@ -3,6 +3,7 @@
 namespace app\modules\mail\controllers;
 
 use app\modules\mail\models\Queue;
+use app\modules\mail\services\QueueService;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -14,6 +15,14 @@ use yii\filters\VerbFilter;
  */
 class QueueController extends Controller
 {
+    public QueueService $queueService;
+
+    public function __construct($id, $module, $config = [], QueueService $queueService)
+    {
+        parent::__construct($id, $module, $config);
+        $this->queueService = $queueService;
+    }
+
     /**
      * @inheritDoc
      */
@@ -129,19 +138,7 @@ class QueueController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost) {
-            Yii::$app->mailer->compose()
-                ->setFrom(Yii::$app->params['senderEmail'])
-                ->setTo($model->email)
-                ->setTextBody($model->text)
-                ->send();
-
-            $model->load([
-                'Queue' => [
-                    'sent_at' => time(),
-                    'status' => Queue::STATUS_SENT
-                ]
-            ]);
-            $model->save();
+            $this->queueService->send($model);
 
 
             $session = Yii::$app->session;
