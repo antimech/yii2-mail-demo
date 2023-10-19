@@ -1,12 +1,12 @@
 <?php
 
-use app\models\Template;
+use app\modules\mail\models\Template;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\Queue $model */
+/** @var app\modules\mail\models\Queue $model */
 /** @var yii\widgets\ActiveForm $form */
 
 $templates = ArrayHelper::map(Template::find()->all(), 'id', 'text');

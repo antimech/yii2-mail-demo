@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var yii\web\View $this */
-/* @var app\models\Template $model */
+/* @var app\modules\mail\models\Template $model */
 
 $this->title = 'Create Template';
 $this->params['breadcrumbs'][] = ['label' => 'Templates', 'url' => ['index']];

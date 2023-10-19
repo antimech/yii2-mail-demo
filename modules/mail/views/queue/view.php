@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var app\models\Queue $model */
+/** @var app\modules\mail\models\Queue $model */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Queues', 'url' => ['index']];

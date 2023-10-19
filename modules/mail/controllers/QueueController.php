@@ -2,7 +2,7 @@
 
 namespace app\modules\mail\controllers;
 
-use app\models\Queue;
+use app\modules\mail\models\Queue;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;

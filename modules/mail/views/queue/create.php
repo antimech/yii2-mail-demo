@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var app\models\Queue $model */
+/** @var app\modules\mail\models\Queue $model */
 
 $this->title = 'Create Queue';
 $this->params['breadcrumbs'][] = ['label' => 'Queues', 'url' => ['index']];

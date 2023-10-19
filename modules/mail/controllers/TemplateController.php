@@ -2,7 +2,7 @@
 
 namespace app\modules\mail\controllers;
 
-use app\models\Template;
+use app\modules\mail\models\Template;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;

@@ -2,7 +2,7 @@
 
 namespace app\modules\mail\commands;
 
-use app\models\Queue;
+use app\modules\mail\models\Queue;
 use Yii;
 use yii\console\Controller;
 use yii\console\ExitCode;

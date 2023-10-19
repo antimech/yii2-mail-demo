@@ -2,7 +2,7 @@
 
 namespace app\modules\mail\migrations;
 
-use app\models\Queue;
+use app\modules\mail\models\Queue;
 use yii\db\Migration;
 
 /**

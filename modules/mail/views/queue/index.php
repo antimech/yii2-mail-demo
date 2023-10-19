@@ -1,6 +1,6 @@
 <?php
 
-use app\models\Queue;
+use app\modules\mail\models\Queue;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
